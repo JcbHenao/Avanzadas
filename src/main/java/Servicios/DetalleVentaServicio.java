@@ -3,27 +3,18 @@ package Servicios;
 public class DetalleVentaServicio {
 
     private Servicios servicio;
-    private String fecha;
     private int cantidad;
     private float totalPrecio;
 
-    public DetalleVentaServicio(Servicios servicio, int cantidad, String fecha) {
-        this.fecha = fecha;
+    public DetalleVentaServicio(Servicios servicio, int cantidad, float totalPrecio) {
         this.servicio = servicio;
+
         this.cantidad = cantidad;
-        this.totalPrecio = cantidad * servicio.getPrecioServicio();
+        this.totalPrecio = totalPrecio;
     }
 
     public Servicios getServicio() {
         return servicio;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
     }
 
     public int getCantidad() {
@@ -38,13 +29,18 @@ public class DetalleVentaServicio {
         return totalPrecio;
     }
 
-    public void setTotalPrecio(float totalPrecio) {
-        this.totalPrecio = totalPrecio;
+    public void recalcularTotalPrecio() {
+        totalPrecio = cantidad * servicio.getPrecioServicio();
+    }
+
+    public void actualizarDetalleVenta(int nuevaCantidad) {
+        setCantidad(nuevaCantidad);
+        recalcularTotalPrecio();
     }
 
     @Override
     public String toString() {
-        return "DetalleVentaServicio{" + "servicio=" + servicio + ", fecha=" + fecha + ", cantidad=" + cantidad + ", totalPrecio=" + totalPrecio + '}';
+        return "DetalleVentaServicio{" + "servicio=" + servicio + ", cantidad=" + cantidad + ", totalPrecio=" + totalPrecio + '}';
     }
 
 }
